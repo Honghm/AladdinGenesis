@@ -104,7 +104,30 @@ GameObject *Grid::NewObject(int id, int type, int direction, int width, int heig
 	case BRICK:
 		return new Brick(x, y, width, height);
 		break;
-	
+	case ARROW:
+		return new Arrow(x, y, width, height, state);
+		break;
+	case BOB:
+		return new Bob(x, y, width, height, state);
+		break;
+	case MOVINGBRICK:
+		return new MovingBrick(x, y, width, height, state);
+		break;
+	case APPLEITEM:
+		return new AppleItem(x, y, width, height);
+		break;
+	case REDJEWEL:
+		return new RedJewel(x, y, width, height);
+		break;
+	case GENIE:
+		return new Genie(x, y, width, height);
+		break;
+	case HEART:
+		return new Heart(x, y, width, height);
+		break;
+	case RESTARTPOINT:
+		return new RestartPoint(id, x, y, width, height);
+		break;
 	}
 }
 

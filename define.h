@@ -19,11 +19,23 @@ enum Type
 	ALADIN = 01,
 	ALADIN2 = 2,
 	ALADIN3=3,
-	
+	ITEM = 6,
+
+	EXPLOSION = 5,
 	BRICK = 20,
+	ARROW = 21,
+	BOB = 22,
+	MOVINGBRICK = 23,
+	APPLEITEM = 27,
+	REDJEWEL = 28,
+	GENIE = 29,
+	HEART = 30,
+	RESTARTPOINT = 31,
+
+
 	BOX = 10,
 	SCENEGAME=42,
-	
+
 
 	//Map tu 100
 	Map1 = 100,

@@ -57,7 +57,7 @@ HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int Sc
 			NULL,
 			hInstance,
 			NULL);
-
+	/*	MoveWindow(hWnd, 0, 0, 2 * SCREEN_WIDTH, 2 * SCREEN_HEIGHT, TRUE);*/
 	if (!hWnd)
 	{
 		OutputDebugString("[ERROR] CreateWindow failed");

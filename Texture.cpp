@@ -60,8 +60,8 @@ void CTexture::LoadTexTure()
 	Add(Type::ALADIN, "Resources/Aladin/Aladdin4.png", D3DCOLOR_XRGB(255, 0, 255));
 	Add(Type::ALADIN2, "Resources/Aladin/Aladdin2.png", D3DCOLOR_RGBA(106, 148,189, 1));
 	Add(Type::ALADIN3, "Resources/Aladin/Aladdin5.png", D3DCOLOR_RGBA(106, 148, 189, 1));
-	
-
+	Add(Type::EXPLOSION, "Resources/Enemy/EnemyExplosions.png", D3DCOLOR_XRGB(186, 254, 202));
+	Add(Type::ITEM, "Resources/Enemy/Items.png", D3DCOLOR_XRGB(248, 0, 248));
 	//Map
 	Add(Type::Map1, "Resources/Map/map1_tileSet.png");
 	Add(Type::Map2, "Resources/Map/map2_tileSet.png");
@@ -74,7 +74,7 @@ void CTexture::LoadTexTure()
 	Add(Type::Map9, "Resources/Map/map9_tileSet.png");
 	Add(Type::Map10, "Resources/Map/map10_tileSet.png");
 	
-	
+	Add(Type::Map_Object, "Resources/Map/MapObject.png", D3DCOLOR_XRGB(163, 73, 164));
 
 	//Bbox
 	Add(Type::BOX, "Resources/Object/bbox.png");

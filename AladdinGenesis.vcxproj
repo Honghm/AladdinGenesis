@@ -123,6 +123,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AppleItem.cpp" />
+    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Bob.cpp" />
     <ClCompile Include="define.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -131,11 +134,17 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Genie.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Heart.cpp" />
+    <ClCompile Include="Items.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Aladin.cpp" />
     <ClCompile Include="MapObject.cpp" />
+    <ClCompile Include="MovingBrick.cpp" />
+    <ClCompile Include="RedJewel.cpp" />
+    <ClCompile Include="RestartPoint.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -143,6 +152,9 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AppleItem.h" />
+    <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Bob.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CGame.h" />
@@ -151,10 +163,16 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Genie.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="Heart.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Aladin.h" />
     <ClInclude Include="MapObject.h" />
+    <ClInclude Include="MovingBrick.h" />
+    <ClInclude Include="RedJewel.h" />
+    <ClInclude Include="RestartPoint.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="SceneManager.h" />

@@ -64,6 +64,33 @@
     <Filter Include="GameComponents\Sound">
       <UniqueIdentifier>{2cb914b2-4c6d-408c-ae41-4ceb2d1f6b43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Arrow">
+      <UniqueIdentifier>{242edff1-2922-42b5-87a3-8b54f82251e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Bob">
+      <UniqueIdentifier>{bd4f792a-dec3-4abb-a09c-b599f112d179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\MovingBrick">
+      <UniqueIdentifier>{178e4ef1-2844-4cd0-a3a1-ce10703c162f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items">
+      <UniqueIdentifier>{136b6516-817b-48da-8407-60faceef4fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\AppleItem">
+      <UniqueIdentifier>{48efbd40-e7fe-4f55-bdb5-20347e9032b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\Genie">
+      <UniqueIdentifier>{a0e444e8-8198-43d0-a6d3-89ff966a816c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\Red Jewel">
+      <UniqueIdentifier>{38f6933e-6def-489a-8872-89124fce3c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\RestartPoint">
+      <UniqueIdentifier>{1d4589b1-6111-4c56-bf27-0eaebf8c8efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items\Heart">
+      <UniqueIdentifier>{560b7acc-0a99-4590-877e-39c725767de8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -120,6 +147,33 @@
     <ClCompile Include="define.cpp">
       <Filter>GameComponents\GameDefine</Filter>
     </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Object\Arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="Bob.cpp">
+      <Filter>Object\Bob</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingBrick.cpp">
+      <Filter>Object\MovingBrick</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleItem.cpp">
+      <Filter>Object\Items\AppleItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Genie.cpp">
+      <Filter>Object\Items\Genie</Filter>
+    </ClCompile>
+    <ClCompile Include="RedJewel.cpp">
+      <Filter>Object\Items\Red Jewel</Filter>
+    </ClCompile>
+    <ClCompile Include="RestartPoint.cpp">
+      <Filter>Object\Items\RestartPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>Object\Items\Heart</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -172,6 +226,33 @@
     </ClInclude>
     <ClInclude Include="MapObject.h">
       <Filter>GameComponents\GameMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>Object\Arrow</Filter>
+    </ClInclude>
+    <ClInclude Include="Bob.h">
+      <Filter>Object\Bob</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingBrick.h">
+      <Filter>Object\MovingBrick</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="AppleItem.h">
+      <Filter>Object\Items\AppleItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Genie.h">
+      <Filter>Object\Items\Genie</Filter>
+    </ClInclude>
+    <ClInclude Include="RedJewel.h">
+      <Filter>Object\Items\Red Jewel</Filter>
+    </ClInclude>
+    <ClInclude Include="RestartPoint.h">
+      <Filter>Object\Items\RestartPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>Object\Items\Heart</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
