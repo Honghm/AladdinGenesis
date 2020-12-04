@@ -91,6 +91,30 @@
     <Filter Include="Object\Items\Heart">
       <UniqueIdentifier>{560b7acc-0a99-4590-877e-39c725767de8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameComponents\Board">
+      <UniqueIdentifier>{36b0b14f-0cee-4134-a5d3-e86c290ba846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\AppleBoard">
+      <UniqueIdentifier>{a89dd4de-ad8b-4386-8c54-dedaac8357b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\Font">
+      <UniqueIdentifier>{696615e9-0f7d-4480-87d7-5231a5df5b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\HealthBoard">
+      <UniqueIdentifier>{17da4808-dee2-4301-9091-2ec524d36162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Board\RedJewelBoard">
+      <UniqueIdentifier>{4ab6ad36-d123-477c-8153-1cc186e16bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Weapon">
+      <UniqueIdentifier>{0fdc373f-2cc1-4fdc-b3c5-314301881823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Weapon\Apple">
+      <UniqueIdentifier>{5e62a5cd-62bf-40f8-88b1-43408fb7de01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Rope">
+      <UniqueIdentifier>{24bfc56c-ca2f-4b6e-930d-99a7aaf62b49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -174,6 +198,30 @@
     <ClCompile Include="Heart.cpp">
       <Filter>Object\Items\Heart</Filter>
     </ClCompile>
+    <ClCompile Include="AppleBoard.cpp">
+      <Filter>GameComponents\Board\AppleBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>GameComponents\Board\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBoard.cpp">
+      <Filter>GameComponents\Board\HealthBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="RedJewelBoard.cpp">
+      <Filter>GameComponents\Board\RedJewelBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>GameComponents\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="Apple.cpp">
+      <Filter>GameComponents\Weapon\Apple</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>GameComponents\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Rope.cpp">
+      <Filter>Object\Rope</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -253,6 +301,30 @@
     </ClInclude>
     <ClInclude Include="Heart.h">
       <Filter>Object\Items\Heart</Filter>
+    </ClInclude>
+    <ClInclude Include="AppleBoard.h">
+      <Filter>GameComponents\Board\AppleBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>GameComponents\Board\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBoard.h">
+      <Filter>GameComponents\Board\HealthBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="RedJewelBoard.h">
+      <Filter>GameComponents\Board\RedJewelBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>GameComponents\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="Apple.h">
+      <Filter>GameComponents\Weapon\Apple</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>GameComponents\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>Object\Rope</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

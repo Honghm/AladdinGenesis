@@ -7,7 +7,7 @@
 #include "Keyboard.h"
 #include"Grid.h"
 #include"MapObject.h"
-
+#include"Board.h"
 
 
 
@@ -24,7 +24,7 @@ class SceneGame :public Scene
 	MapObject *mMapObject;
 	Camera *mCamera;
 	Grid *mGrid;
-
+	Board* mBoard;
 	bool isRunning;
 	DWORD  time;
 	bool isTransitionScene;

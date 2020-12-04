@@ -1,5 +1,30 @@
 ﻿#include"Aladin.h"
 
+#define ALADIN_IDLE1_STATE 1
+#define ALADIN_IDLE2_STATE 2
+#define ALADIN_IDLE3_STATE 3
+#define ALADIN_IDLE4_STATE 4
+#define ALADIN_IDLE5_STATE 5
+#define ALADIN_FACEUP_STATE 6
+#define ALADIN_SIT_IDLE_STATE 7
+#define ALADIN_JUMP_STATE 8
+#define ALADIN_IDLE_ATTACK_STATE 9
+#define ALADIN_SIT_ATTACK_STATE 10
+#define ALADIN_IDLE_ATTACKAPPLE_STATE 11
+#define ALADIN_SIT_ATTACKAPPLE_STATE 12
+#define ALADIN_JUMP_ATTACK_STATE 13
+#define ALADIN_JUMP_ATTACKAPPLE_STATE 14
+#define ALADIN_PACEUP_ATTACK_STATE 15
+#define ALADIN_RUN_STATE 16
+#define ALADIN_RUN_ATTACK_STATE 17
+#define ALADIN_RUN_JUMP_STATE 19
+#define ALADIN_STOP_STATE 20
+#define ALADIN_CLIMB_STATE 21
+#define ALADIN_CLIMB_JUMP_STATE 22
+#define ALADIN_CLIMB_ATTACK_STATE 23
+#define ALADIN_CLIMB_ATTACKAPPLE_STATE 24
+#define ALADIN_PUSH_STATE 25
+#define ALADIN_RUN_ATTACKAPPLE_STATE 26
 
 
 Aladin *Aladin::_instance = NULL;
@@ -10,7 +35,7 @@ void Aladin::ResetAll()
 	this->life = 3;
 	this->isBeingHurt = false;
 	this->point = 0;
-	this->numApple = 30;
+	this->numApple = 99999;
 	restartPoint = D3DXVECTOR2(113, 991);
 
 }
@@ -27,9 +52,9 @@ Aladin::Aladin()
 	GameObject::GameObject();
 	this->type = ALADDIN;
 	this->health = 8;
-	numApple = 30;
+	numApple = 9999;
 	life = 3;
-	
+	mApple = new Apple();
 	LoadResources();
 	
 }
@@ -455,13 +480,13 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 			GameObject::Update(dt, coObject);
 
 		}
-		
+		CollisionWithRope(coObject);
 		vy += ALADIN_GRAVITY * dt;
-		if (climbing >= 0)
+		if (climbing >= 0)//đang ở trạng thái trèo
 		{
 			switch (climbing)
 			{
-			case 0:
+			case 0: //đứng im trên dây
 				vy = 0;
 				dy = 0;
 				break;
@@ -479,10 +504,12 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				break;
 			}
 		}
-		
+		CollisionWithWall(coObject);
+		CollisionWithItems(coObject);
 		if (GetTickCount() - untouchableTime >= ALADIN_BEINGHURT_TIME)
 		{
-			
+			CollisionWithDefensiveWork(coObject);
+			CollisionWithEnemy(coObject);
 			if (isBeingHurt)
 				animations[ALADIN_ANI_BEINGHURT]->SetCurrentFrame();
 		}
@@ -497,12 +524,14 @@ void Aladin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				if (!isFinish)
 				{
 					
-					
+					mApple->SetSpeed(this->nx);
+					mApple->SetPosition(this->x, this->y, this->nx);
+
 					isFinish = true;
-					
+					mApple->SetIsFinish();
 					SubNumApple();
 				}
-				
+				mApple->Update(dt, coObject);
 			}
 		}
 		if (vx < 0 && x < 8) x = 8;
@@ -549,45 +578,45 @@ void Aladin::Render()
 		{
 			switch (currentState)
 			{
-			case 1://trang thai idle1
+			case ALADIN_IDLE1_STATE://trang thai idle1
 				isBusy = true;
 				dem++;
 				ani_ID = ALADIN_ANI_IDLE1;
 				loop = 0;
 				if (dem >= ALADIN_IDLE1_TIME)
 				{
-					currentState = 2;
+					currentState = ALADIN_IDLE2_STATE;
 					dem = 0;
 					animations[1]->SetCurrentFrame();
 				}
 				break;
-			case 2:
+			case ALADIN_IDLE2_STATE:
 				isBusy = true;
 				dem++;
 				ani_ID = ALADIN_ANI_IDLE2;
 				loop = 1;
 				if (dem >= ALADIN_IDLE2_TIME)
 				{
-					currentState = 3;
+					currentState = ALADIN_IDLE3_STATE;
 					dem = 0;
 					animations[2]->SetCurrentFrame();
 				}
 				break;
-			case 3:
+			case ALADIN_IDLE3_STATE:
 				isBusy = true;
 				ani_ID = ALADIN_ANI_IDLE3;
 				loop = 1;
 				if (animations[ALADIN_ANI_IDLE3]->GetCurrentFrame() == 4)
-					currentState = 4;
+					currentState = ALADIN_IDLE4_STATE;
 				break;
-			case 4:
+			case ALADIN_IDLE4_STATE:
 				isBusy = true;
 				ani_ID = ALADIN_ANI_IDLE4;
 				loop = 1;
 				if (animations[ani_ID]->GetCurrentFrame() == 9)
 					currentState = 4 + rand() % (2);
 				break;
-			case 5:
+			case ALADIN_IDLE5_STATE:
 				isBusy = true;
 				ani_ID = ALADIN_ANI_IDLE5;
 				loop = 1;
@@ -595,17 +624,17 @@ void Aladin::Render()
 					currentState = 4 + rand() % (2);
 				break;
 
-			case 6://ngửa mặt
+			case ALADIN_FACEUP_STATE://ngửa mặt
 				isBusy = false;
 				ani_ID = ALADIN_ANI_FACEUP;
 				break;
 
-			case 7://ngồi xuống
+			case ALADIN_SIT_IDLE_STATE://ngồi xuống
 				isBusy = false;
 				ani_ID = ALADIN_ANI_SIT;
 				break;
 
-			case 9://đứng tấn công
+			case ALADIN_IDLE_ATTACK_STATE://đứng tấn công
 				ani_ID = ALADIN_ANI_ATTACKING1;
 				isBusy = true;
 				if (GetFrame(ani_ID) == 4)
@@ -616,7 +645,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 10://ngồi tấn công
+			case ALADIN_SIT_ATTACK_STATE://ngồi tấn công
 				ani_ID = ALADIN_ANI_ATTACKING2;
 				if (GetFrame(ani_ID) == 6)
 				{
@@ -628,7 +657,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 11://đứng ném táo
+			case ALADIN_IDLE_ATTACKAPPLE_STATE://đứng ném táo
 				ani_ID = ALADIN_ANI_ATTACKAPPLE;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -637,7 +666,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 12://ngồi ném táo
+			case ALADIN_SIT_ATTACKAPPLE_STATE://ngồi ném táo
 				if (GetFrame(ALADIN_ANI_ATTACKAPPLE2) == 3)
 				{
 					index = 0;
@@ -647,7 +676,7 @@ void Aladin::Render()
 				loop = 0;
 				break;
 
-			case 15://ngửa mặt và tấn công
+			case ALADIN_PACEUP_ATTACK_STATE://ngửa mặt và tấn công
 				ani_ID = ALADIN_ANI_ATTACKING5;
 				if (GetFrame(ani_ID) == 19)//lấy frame hiện tại của nó đem đi so sánh để xem nó đã kết thúc 1 vòng lặp animation hay chưa
 				{
@@ -662,13 +691,13 @@ void Aladin::Render()
 		{
 			switch (currentState)
 			{
-			case 16:
+			case ALADIN_RUN_STATE: //chạy thường
 				isBusy = false;
 				ani_ID = ALADIN_ANI_RUNNING;
 				formSize = 2;
 				break;
 
-			case 17://chạy và tấn công
+			case ALADIN_RUN_ATTACK_STATE://chạy và tấn công
 				ani_ID = ALADIN_ANI_ATTACKING3;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -678,7 +707,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 26://chạy và ném táo
+			case ALADIN_RUN_ATTACKAPPLE_STATE://chạy và ném táo
 				ani_ID = ALADIN_ANI_ATTACKAPPLE4;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -687,12 +716,12 @@ void Aladin::Render()
 				}
 				break;
 
-			case 20://dung lai
+			case ALADIN_STOP_STATE://dung lai
 				ani_ID = ALADIN_ANI_STOP;
 				if (GetFrame(ani_ID) == 5)
 					isResetFrame = true;
 				break;
-			case 25:
+			case ALADIN_PUSH_STATE://đẩy tường
 				DebugOut(L"A", NULL);
 				ani_ID = ALADIN_ANI_PUSHING;
 				
@@ -701,13 +730,7 @@ void Aladin::Render()
 			default:
 				isBusy = false;
 				ani_ID = ALADIN_ANI_RUNNING;
-				if (isCollisWithWall)
-				{
 				
-					ani_ID = ALADIN_ANI_PUSHING;
-					formSize = 2;
-					isPushing = true;
-				}
 				formSize = 2;
 				break;
 			}
@@ -717,13 +740,13 @@ void Aladin::Render()
 		{
 			switch (currentState)
 			{
-			case 8://nhay len binh thuong
+			case ALADIN_JUMP_STATE://nhay len binh thuong
 				ani_ID = ALADIN_ANI_JUMPPING;
 				if (GetFrame(ani_ID) == 8)
 					isBusy = false;
 				break;
 
-			case 13://nhay tai cho va tan cong
+			case ALADIN_JUMP_ATTACK_STATE://nhay tai cho va tan cong
 				ani_ID = ALADIN_ANI_ATTACKING3;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -732,7 +755,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 14://nhảy tại chỗ và ném táo
+			case ALADIN_JUMP_ATTACKAPPLE_STATE://nhảy tại chỗ và ném táo
 				ani_ID = ALADIN_ANI_ATTACKAPPLE3;
 				if (GetFrame(ani_ID) == 4)
 				{
@@ -741,7 +764,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 19://vừa chạy vừa nhảy
+			case ALADIN_RUN_JUMP_STATE://vừa chạy vừa nhảy
 				ani_ID = ALADIN_ANI_JUMPPING2;
 				loop = 1;
 
@@ -749,7 +772,7 @@ void Aladin::Render()
 					index = 0;
 				break;
 
-			case 17:
+			case ALADIN_RUN_ATTACK_STATE://đang chạy nhảy lên và đánh
 				ani_ID = ALADIN_ANI_ATTACKING3;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -758,17 +781,17 @@ void Aladin::Render()
 				}
 				break;
 
-			case 21:
+			case ALADIN_CLIMB_STATE:
 				ani_ID = ALADIN_ANI_CLIMBING_IDLE;
 				if (climbing == 1 || climbing == 2)
 					ani_ID = ALADIN_ANI_CLIMBING;
 				break;
 
-			case 22://nhảy khi đang leo dây
+			case ALADIN_CLIMB_JUMP_STATE://nhảy khi đang leo dây
 				ani_ID = ALADIN_ANI_JUMP_ON_CLIMBING;
 				break;
 
-			case 23://tấn công khi đang leo dây
+			case ALADIN_CLIMB_ATTACK_STATE://tấn công khi đang leo dây
 				ani_ID = ALADIN_ANI_ATTACK_ON_CLIMBING;
 				formSize = 0;
 				if (GetFrame(ani_ID) == 7)
@@ -779,7 +802,7 @@ void Aladin::Render()
 				toY = -45;
 				break;
 
-			case 24://ném táo khi đang leo
+			case ALADIN_CLIMB_ATTACKAPPLE_STATE://ném táo khi đang leo
 				ani_ID = ALADIN_ANI_APPLE_ON_CLIMBING;
 				formSize = 3;
 				if (nx == 1)
@@ -800,7 +823,7 @@ void Aladin::Render()
 				}
 				break;
 
-			case 26://chạy và ném táo
+			case ALADIN_RUN_ATTACKAPPLE_STATE://chạy và ném táo
 				ani_ID = ALADIN_ANI_ATTACKAPPLE4;
 				if (GetFrame(ani_ID) == 5)
 				{
@@ -857,13 +880,15 @@ void Aladin::Render()
 		if (isAttachApple&&!isBeingHurt)
 		{
 			if (numApple > 0)
-			{ }
+			{
+				mApple->Render();
+			}
 			else
 				isAttachApple = false;
 		}
 		if (DISPLAY_BOX == 1)
 		{
-			if (currentState == 21)
+			if (currentState == ALADIN_CLIMB_STATE)
 				RenderBoundingBox(22 + (int)X, 26);
 			else
 				if (isAttacking)
@@ -895,26 +920,27 @@ void Aladin::SetState(int state)
 
 	switch (state)
 	{
+	#pragma region trạng thái đứng im
 	case ALADIN_IDLE_STATE:
-		isSit = isFaceUp=isPushing=false;
-		if(isResetVx)
+		isSit = isFaceUp = isPushing = false;
+		if (isResetVx)
 			vx = 0;
-		if (index == 14)
-			currentState = 14;
+		if (index == ALADIN_JUMP_ATTACKAPPLE_STATE)
+			currentState = ALADIN_JUMP_ATTACKAPPLE_STATE;
 		if (!isBusy)
 		{
-			currentState = 1;
+			currentState = ALADIN_IDLE1_STATE;
 			isAttacking = false;
 			isSitAttach = false;
 			dem = 0;
 			climbing = -1;
-			if(isCollisWithBrick)
+			if (isCollisWithBrick)
 				isJumpOnRope = false;
 			isResetFrame = true;
 		}
 		if (isClimbing)
 		{
-			currentState = 21;
+			currentState = ALADIN_CLIMB_STATE;
 			climbing = 0;
 			if (ropeX > this->x)
 			{
@@ -922,7 +948,7 @@ void Aladin::SetState(int state)
 			}
 			else//ropeX<this->x
 			{
-				X = (this->x + 18) -ropeX ;
+				X = (this->x + 18) - ropeX;
 			}
 			if (this->y < yRopeStart)
 				this->y = yRopeStart;
@@ -932,7 +958,7 @@ void Aladin::SetState(int state)
 		{
 			if (isClimbing)
 			{
-				currentState = 21;
+				currentState = ALADIN_CLIMB_STATE;
 				climbing = 0;
 				dx = 0;
 				if (ropeX > this->x)
@@ -949,21 +975,25 @@ void Aladin::SetState(int state)
 			}
 		}
 		break;
-	
+	#pragma endregion
+
+	#pragma region Trạng thái ngước nhìn
 	case ALADIN_FACEUP_STATE:
-		isBusy = isFaceUp=true;
+		isBusy = isFaceUp = true;
 		climbing = -1;
 		switch (index)
 		{
-		case 15://đang có trạng thái tấn công xảy ra, để nó hoàn thành trk
-			currentState = 15;
+		case ALADIN_PACEUP_ATTACK_STATE://đang có trạng thái tấn công xảy ra, để nó hoàn thành trk
+			currentState = ALADIN_PACEUP_ATTACK_STATE;
 			break;
 		default:
-			currentState = 6;
+			currentState = ALADIN_FACEUP_STATE;
 			break;
 		}
 		break;
+	#pragma endregion
 
+	#pragma region Trạng thái ngồi
 	case ALADIN_SIT_STATE:
 		if (vy == 0)
 		{
@@ -972,32 +1002,34 @@ void Aladin::SetState(int state)
 		}
 		switch (index)
 		{
-		case 10://đang có trạng thái tấn công xảy ra khi đang ngồi, ưu tiên hoàn thành tấn công trk
-			currentState = 10;
+		case ALADIN_SIT_ATTACK_STATE://đang có trạng thái tấn công xảy ra khi đang ngồi, ưu tiên hoàn thành tấn công trk
+			currentState = ALADIN_SIT_ATTACK_STATE;
 			break;
-		case 12://(tương tự)
-			currentState = 12;
+		case ALADIN_SIT_ATTACKAPPLE_STATE://(tương tự)
+			currentState = ALADIN_SIT_ATTACKAPPLE_STATE;
 			break;
 		default:
 			isSitAttach = false;
-			currentState = 7;
+			currentState = ALADIN_SIT_IDLE_STATE;
 			break;
 		}
 		break;
+	#pragma endregion
 
+	#pragma region Trạng thái nhảy
 	case ALADIN_JUMPPING_STATE:
 		if (isCollisWithBrick)//nếu đang va chạm với nền thì ms cho nhảy tiếp, tránh trường hợp đang nhảy thì nhấn nhảy lần 2.
 		{
 			vy = -ALADIN_JUMPPING_SPEED;
 			if (vx == 0)
 			{
-				currentState = 8;
+				currentState = ALADIN_JUMP_STATE; //nhảy tại chỗ
 				ResetFrame(ALADIN_ANI_JUMPPING);
 			}
 			else
 			{
-				currentState = 19;//vừa chạy vừa nhảy
-				index = 19;
+				currentState = ALADIN_RUN_JUMP_STATE;//vừa chạy vừa nhảy
+				index = ALADIN_RUN_JUMP_STATE;//set trạng thái ưu tiên là nhảy
 			}
 			ResetFrame(ALADIN_ANI_JUMPPING2);
 			isCollisWithBrick = false;
@@ -1005,14 +1037,16 @@ void Aladin::SetState(int state)
 		else
 			if (climbing == 0)
 			{
-				currentState = 22;
+				currentState = ALADIN_CLIMB_JUMP_STATE; //nhảy thoát khỏi dây
 				vy = -0.33f;
 				isJumpOnRope = true;
 				climbing = -1;
 				isBusy = false;
-			}	
+			}
 		break;
-		
+	#pragma endregion
+
+	#pragma region Trạng thái đánh
 	case ALADIN_ATTACKING_STATE:
 		if (climbing == -1)
 		{
@@ -1020,38 +1054,38 @@ void Aladin::SetState(int state)
 			{
 				isSit = false;
 				isSitAttach = true;
-				currentState = 10;//ngồi tấn công
-				index = 10;//chỉ số cho biết nó đang ở trạng thái tấn công nào.
+				currentState = ALADIN_SIT_ATTACK_STATE;//ngồi tấn công
+				index = ALADIN_SIT_ATTACK_STATE;//chỉ số cho biết nó đang ở trạng thái tấn công nào.
 			}
 			else if (isFaceUp)//trường hợp đang ngửa mặt và tấn công
 			{
 				isFaceUp = false;
-				currentState = 15;
-				index = 15;
+				currentState = ALADIN_PACEUP_ATTACK_STATE;
+				index = ALADIN_PACEUP_ATTACK_STATE;
 			}
 			else if (vx != 0)
 			{
-				currentState = 17;//chạy và tấn công
-				index = 17;
+				currentState = ALADIN_RUN_ATTACK_STATE;//chạy và tấn công
+				index = ALADIN_RUN_ATTACK_STATE;
 			}
 			else
 			{
 				DebugOut(L"y", NULL);
-				currentState = 9;//đứng yên tấn công
+				currentState = ALADIN_IDLE_ATTACK_STATE;//đứng yên tấn công
 			}
-		
+
 			if (!isCollisWithBrick)
 			{
-				currentState = 13;//nhảy tại chỗ và tấn công
+				currentState = ALADIN_JUMP_ATTACK_STATE;//nhảy tại chỗ và tấn công
 				vy = 0;
 			}
-			
+
 		}
 		else
-			currentState = 23;//tấn công khi đang leo dây
+			currentState = ALADIN_CLIMB_ATTACK_STATE;//tấn công khi đang leo dây
 		isBusy = true;
 		isAttacking = true;
-		
+
 		if (isResetFrame)//set về frame bắt đầu=0 để tăng độ chính xác
 		{
 			isResetFrame = false;
@@ -1063,45 +1097,48 @@ void Aladin::SetState(int state)
 			ResetFrame(ALADIN_ANI_ATTACK_ON_CLIMBING);
 		}
 		break;
+	#pragma endregion
 
+	#pragma region Trạng thái ném táo
 	case ALADIN_ATTACKAPPLE_STATE:
 		if (climbing == -1)
 		{
 			if (isSit)
 			{
 				isSit = false;
-				currentState = 12;//ngồi và ném táo(tương tự ngồi và tấn công)
-				index = 12;//chỉ số biểu thị(dùng để phân biệt ngồi và ngồi tấn công khi cả 2 trạng thái đồng thời xảy ra,
+				currentState = ALADIN_SIT_ATTACKAPPLE_STATE;//ngồi và ném táo(tương tự ngồi và tấn công)
+				index = ALADIN_SIT_ATTACKAPPLE_STATE;//chỉ số biểu thị(dùng để phân biệt ngồi và ngồi tấn công khi cả 2 trạng thái đồng thời xảy ra,
 				//theo đó hành động có index khác 0 thì nó đc ưu tiên hoàn thành và set tới trạng thái của nó trước)
 			}
 			else if (vx != 0)
 			{
 				DebugOut(L"A", NULL);
-				currentState = 26;//chạy và ném táo
-				index = 26;
+				currentState = ALADIN_RUN_ATTACKAPPLE_STATE;//chạy và ném táo
+				index = ALADIN_RUN_ATTACKAPPLE_STATE;
 			}
 			else
-				currentState = 11;
-			
+				currentState = ALADIN_IDLE_ATTACKAPPLE_STATE;
+
 			if (!isCollisWithBrick)
 			{
-				currentState = 14;//nhảy tại chỗ và ném táo(tương tự currentState 13)
+				currentState = ALADIN_JUMP_ATTACKAPPLE_STATE;//nhảy tại chỗ và ném táo(tương tự currentState 13)
 				vy = 0;
 				if (vx != 0)
-					index = 14;
-			} 
+					index = ALADIN_JUMP_ATTACKAPPLE_STATE;
+			}
 			if (!isBeingHurt && !isFaceUp)
 			{
 				isAttachApple = true;
-				
+				mApple->Revival();
+					
 			}
 		}
 		else
-			currentState = 24;//tấn công khi đang leo
+			currentState = ALADIN_CLIMB_ATTACKAPPLE_STATE;//tấn công khi đang leo
 		isBusy = true;
 		isFinish = false;
-		
-		
+
+
 		if (isResetFrame)
 		{
 			isResetFrame = false;
@@ -1112,44 +1149,38 @@ void Aladin::SetState(int state)
 			ResetFrame(ALADIN_ANI_APPLE_ON_CLIMBING);
 		}
 		break;
+	#pragma endregion
 
+	#pragma region Trạng thái đi sang phải
 	case ALADIN_WALKING_RIGHT_STATE:
 		if (climbing == -1)
 		{
 			if (isCollisWithBrick)
 				isJumpOnRope = false;
 			vx = ALADIN_WALKING_SPEED * changeVx;
-			if (isCollisWithWall)
+			switch (index)
 			{
-				currentState = 25;
-				isPushing = true;
-			}
-			else
-			{
-				switch (index)
-				{
-				case 14:
-					currentState = 14;
-					break;
-				case 17:
-					currentState = 17;
-					break;
-				case 18:
-					currentState = 18;
-					break;
-				case 19:
-					currentState = 19;//vừa chạy vừa nhảy
-					break;
-				case 26:
-					currentState = 26;
-					break;
-				default:
-					isAttacking = false;
-					isResetFrame = true;
-					currentState = 16;
-					isSit = false;
-					break;
-				}
+			case ALADIN_JUMP_ATTACKAPPLE_STATE:
+				currentState = ALADIN_JUMP_ATTACKAPPLE_STATE;
+				break;
+			case ALADIN_RUN_ATTACK_STATE:
+				currentState = ALADIN_RUN_ATTACK_STATE;
+				break;
+			case 18:
+				currentState = 18;
+				break;
+			case ALADIN_RUN_JUMP_STATE:
+				currentState = ALADIN_RUN_JUMP_STATE;//vừa chạy vừa nhảy
+				break;
+			case ALADIN_RUN_ATTACKAPPLE_STATE:
+				currentState = ALADIN_RUN_ATTACKAPPLE_STATE;
+				break;
+			default:
+				isAttacking = false;
+				isResetFrame = true;
+				currentState = ALADIN_RUN_STATE;
+				isSit = false;
+				break;
 			}
 		}
 		else
@@ -1157,55 +1188,49 @@ void Aladin::SetState(int state)
 			if (isClimbing)
 			{
 				climbing = 0;
-				currentState = 21;
+				currentState = ALADIN_CLIMB_STATE;
 				vx = dx = 0;
 			}
 		}
 		this->nx = 1;
 		break;
+	#pragma endregion
 
+	#pragma region Trạng thái đi sang trái
 	case ALADIN_WALKING_LEFT_STATE:
 		if (climbing == -1)
 		{
 			vx = -ALADIN_WALKING_SPEED * changeVx;
-			if(isCollisWithBrick)
+			if (isCollisWithBrick)
 				isJumpOnRope = false;
 			if (isClimbing)
 			{
 				climbing = 0;
-				currentState = 21;
+				currentState = ALADIN_CLIMB_STATE;
 				isJumpOnRope = true;
 			}
-			if (isCollisWithWall)
+			switch (index)
 			{
-				currentState = 25;
-				isPushing = true;
-			}
-			else
-			{
-				switch (index)
-				{
-				case 14:
-					currentState = 14;
-					break;
-				case 17:
-					currentState = 17;
-					break;
-				case 18:
-					currentState = 18;
-					break;
-				case 19:
-					currentState = 19;
-					break;
-				case 26:
-					currentState = 26;
-					break;
-				default:
-					isAttacking = false;
-					currentState = 16;
-					isSit = false;
-					break;
-				}
+			case ALADIN_JUMP_ATTACKAPPLE_STATE:
+				currentState = ALADIN_JUMP_ATTACKAPPLE_STATE;
+				break;
+			case ALADIN_RUN_ATTACK_STATE:
+				currentState = ALADIN_RUN_ATTACK_STATE;
+				break;
+			case 18:
+				currentState = 18;
+				break;
+			case ALADIN_RUN_JUMP_STATE:
+				currentState = ALADIN_RUN_JUMP_STATE;
+				break;
+			case ALADIN_RUN_ATTACKAPPLE_STATE:
+				currentState = ALADIN_RUN_ATTACKAPPLE_STATE;
+				break;
+			default:
+				isAttacking = false;
+				currentState = ALADIN_RUN_STATE;
+				isSit = false;
+				break;
 			}
 		}
 		else
@@ -1213,16 +1238,18 @@ void Aladin::SetState(int state)
 			if (isClimbing)
 			{
 				climbing = 0;
-				currentState = 21;
+				currentState = ALADIN_CLIMB_STATE;
 				vx = dx = 0;
 			}
 		}
-			
+
 		this->nx = -1;
 		break;
-
+	#pragma endregion
+	
+	#pragma region Trạng thái dừng
 	case ALADIN_STOP_STATE:
-		vx = this->nx*ALADIN_STOP_SPEED;
+		vx = this->nx * ALADIN_STOP_SPEED;
 		currentState = 20;
 		if (isResetFrame)
 		{
@@ -1231,6 +1258,8 @@ void Aladin::SetState(int state)
 		}
 		break;
 	}
+	#pragma endregion
+	
 }
 
 
@@ -1329,7 +1358,6 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 				//DebugOut(L"Collision", NULL);
 				if (e->nx != 0)//co xay ra va cham theo phuong Ox
 				{
-					if (isCollisWithWall) dx = 0;
 					x += dx;
 				}
 				else//k xay ra va cham theo phuong Ox
@@ -1344,7 +1372,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 						vy = 0;
 					}
 					isCollisWithBrick = true;
-					if (isCollisWithWall) dy = 0;
+					
 				}
 				else// Nhay duoi len(ny==1)
 				{
@@ -1364,4 +1392,337 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 }
 
 
+
+void Aladin::CollisionWithWall(vector<LPGAMEOBJECT>* coObject)
+{
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+	coEventsResult.clear();
+
+	//lay ds cac brick trong list object hien co
+
+	vector<LPGAMEOBJECT> list_Wall;
+	list_Wall.clear();
+	for (UINT i = 0; i < coObject->size(); i++)
+	{
+		if (coObject->at(i)->GetType() == Type::WALL)
+		{
+			list_Wall.push_back(coObject->at(i));
+		}
+	}
+
+	CalcPotentialCollisions(&list_Wall, coEvents);
+
+	if (coEvents.size() != 0)//co xay ra va cham
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			DebugOut(L"W", NULL);
+			LPCOLLISIONEVENT e = coEventsResult[i];
+			if (e->nx == -1 || e->nx == 1)
+			{
+				dx = 0;
+				isCollisWithWall = true;
+				if (e->ny != 0)
+					x += min_tx * dx + nx * 0.4f;
+			}
+			else x += min_tx * dx + nx * 0.4f;
+			if (e->ny == 1)
+				dx = 0;
+
+		}
+	}
+	else
+	{
+		int demCollis = 0;
+		for (int i = 0; i < list_Wall.size(); i++) {
+			if (AABBcollision(list_Wall.at(i)))
+			{
+				/*if (coEvents.at(i)->nx == 0)
+				{*/
+				if (list_Wall.at(i)->GetPosX() < this->x) {
+					if (this->nx == -1) {
+						isCollisWithWall = true;
+						demCollis++;
+						dx = 0;
+					}
+				}
+				else if (list_Wall.at(i)->GetPosX() > (this->x - 4)) {
+					if (this->nx == 1) {
+						isCollisWithWall = true;
+						demCollis++;
+						dx = 0;
+					}
+				}
+			}
+		}
+		if (demCollis == 0)
+			isCollisWithWall = false;
+	}
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+}
+
+void Aladin::CollisionWithRope(vector<LPGAMEOBJECT>* coObject)
+{
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+	coEventsResult.clear();
+
+	//lay ds cac brick trong list object hien co
+
+	vector<LPGAMEOBJECT> list_Rope;
+	list_Rope.clear();
+	for (UINT i = 0; i < coObject->size(); i++)
+	{
+		if (coObject->at(i)->GetType() == Type::ROPE)
+		{
+			list_Rope.push_back(coObject->at(i));
+		}
+	}
+
+	CalcPotentialCollisions(&list_Rope, coEvents);
+
+	if (coEvents.size() == 0)//co xay ra va cham
+	{
+		isClimbing = false;
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+
+			LPCOLLISIONEVENT e = coEventsResult[i];
+			Rope* currentRope = dynamic_cast<Rope*>(e->obj);
+			e->obj->GetPosition(ropeX, ropeY);
+			currentRope->getStartEnd(yRopeStart, yRopeEnd);
+			/*dx = 0;*/
+
+			if (e->nx == 0)
+			{
+				if (e->ny == 1)
+				{
+					y += min_ty * dy + ny * 0.4f;
+					DebugOut(L"Collision", this->y);
+					isClimbing = true;
+					dy = 0;
+					dx = 0;
+				}
+			}
+
+		}
+	}
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+}
+
+void Aladin::CollisionWithItems(vector<LPGAMEOBJECT>* coObject)
+{
+	float rX, rY;
+	vector<LPGAMEOBJECT> listItems;
+	listItems.clear();
+	for (int i = 0; i < coObject->size(); i++)
+		if (coObject->at(i)->GetType() == Type::APPLEITEM || coObject->at(i)->GetType() == Type::REDJEWEL || coObject->at(i)->GetType() == Type::GENIE ||
+			coObject->at(i)->GetType() == Type::HEART || coObject->at(i)->GetType() == Type::RESTARTPOINT)
+			if (coObject->at(i)->GetHealth() != 0)
+				listItems.push_back(coObject->at(i));
+
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+	coEventsResult.clear();
+
+	CalcPotentialCollisions(&listItems, coEvents);//dung aabb de tien doan
+
+	if (coEvents.size() == 0)//co xay ra va cham
+	{
+		for (int i = 0; i < listItems.size(); i++)
+		{
+			LPGAMEOBJECT e = listItems.at(i);
+			if (AABBcollision(e) && e->GetHealth() != 0)
+			{
+				e->SubHealth();
+				if (e->GetType() == Type::RESTARTPOINT)
+				{
+					e->GetPosition(rX, rY);
+					restartPoint.x = rX;
+					restartPoint.y = rY - 25;
+					idRestartPoint = e->GetID();
+					
+				}
+
+			}
+		}
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i];
+			LPGAMEOBJECT item = e->obj;
+			if (item->GetType() == Type::HEART)
+			{
+				Healing(3);
+				if (health >= 8)
+					health = 8;
+			}
+			else if (item->GetType() == Type::REDJEWEL)
+			{
+				AddRedJewel();
+				
+			}
+			else if (item->GetType() == Type::APPLEITEM)
+			{
+				AddApple();
+				
+			}
+
+			else if (item->GetType() == Type::RESTARTPOINT)
+			{
+				
+				item->GetPosition(rX, rY);
+				restartPoint.x = rX;
+				restartPoint.y = rY - 25;
+				idRestartPoint = item->GetID();
+			}
+		
+
+			item->SubHealth();
+			item->Update(dt, coObject);
+
+		}
+	}
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
+}
+
+void Aladin::CollisionWithDefensiveWork(vector<LPGAMEOBJECT>* coObject)
+{
+	float left, top, right, bottom;
+	RECT RAladin;
+	GetBoundingBox(left, top, right, bottom);
+	RAladin.left = left;
+	RAladin.top = top;
+	RAladin.right = right;
+	RAladin.bottom = bottom;
+	vector<LPGAMEOBJECT> listDefensiveWork;
+	listDefensiveWork.clear();
+	for (int i = 0; i < coObject->size(); i++)
+		if (coObject->at(i)->GetType() == Type::ARROW || coObject->at(i)->GetType() == Type::BOB)
+			listDefensiveWork.push_back(coObject->at(i));
+
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+	coEventsResult.clear();
+
+	CalcPotentialCollisions(&listDefensiveWork, coEvents);
+
+	if (coEvents.size() == 0)
+	{
+
+		for (int i = 0; i < listDefensiveWork.size(); i++)
+		{
+			RECT obj;
+			listDefensiveWork.at(i)->GetBoundingBox(left, top, right, bottom);
+			obj.left = left;
+			obj.top = top;
+			obj.right = right;
+			obj.bottom = bottom;
+
+			if (Camera::GetInstance()->isContain(RAladin, obj))
+			{
+				SubHealth();
+				StartUntouchableTime();
+				isBeingHurt = true;
+				DebugOut(L"A", NULL);
+			}
+
+		}
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			StartUntouchableTime();
+			isBeingHurt = true;
+			SubHealth();
+		}
+	}
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+}
+
+void Aladin::CollisionWithEnemy(vector<LPGAMEOBJECT>* coObject)
+{
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+
+	vector<LPGAMEOBJECT> listEnemy;
+	listEnemy.clear();
+	for (UINT i = 0; i < coObject->size(); i++)
+	{
+		LPGAMEOBJECT cO = coObject->at(i);
+		if ((cO->GetType() == Type::BAT || cO->GetType() == GUARD || cO->GetType() == MONKEY || cO->GetType() == SKELETON || cO->GetType() == Type::BONE)
+			&& cO->GetHealth() != 0)
+			listEnemy.push_back(coObject->at(i));
+	}
+
+	for (UINT i = 0; i < listEnemy.size(); i++)
+	{
+		LPGAMEOBJECT e = listEnemy.at(i);
+		if (AABBcollision(e) && e->GetHealth() != 0)
+		{
+			if (isAttacking)
+			{
+				if (e->GetType() == Type::GUARD || e->GetType() == Type::MONKEY)
+				{
+					if (collisGuard == 0)
+					{
+						e->SubHealth();
+						e->SetIsBeingHurt(2);
+						DebugOut(L"G", NULL);
+						collisGuard++;
+					}
+					else if (collisGuard > 20)
+					{
+						e->SubHealth();
+						collisGuard = 0;
+						e->SetIsBeingHurt(2);
+						DebugOut(L"G", NULL);
+					}
+					else
+						collisGuard++;
+				}
+				else
+				{
+					collisGuard = 0;
+					e->SubHealth();
+				}
+			}
+			else
+			{
+				if (e->GetType() == Type::BAT || e->GetType() == Type::SKELETON)
+				{
+					SubHealth();
+					StartUntouchableTime();
+					isBeingHurt = true;
+				}
+			}
+		}
+	}
+}
 

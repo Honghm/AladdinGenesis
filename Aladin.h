@@ -8,6 +8,8 @@
 
 #include"debug.h"
 
+#include "Apple.h"
+#include "Rope.h"
 #include "SceneManager.h"
 
 using namespace std;
@@ -87,7 +89,7 @@ private:
 
 	bool isCollisWithBrick, isCollisWithWall, isCollisWithRope, isClimbing, isBeingHurt;
 	int dem = 0, currentState = 1, index, climbing = -1;
-	//dem: biến đếm số lần update của cùng 1 trạng thái, currentState:biến nhận dạng trạng thái hiện tại
+	//dem: biến đếm số lần update của cùng 1 trạng thái, currentState: biến nhận dạng trạng thái hiện tại phục vụ cho việc chuyển trạng thái
 	//index: dùng để biểu thị cho trạng thái đc ưu tiên khi có 2 trạng thái đồng thời xảy ra ví dụ đang chạy thì tấn công.
 	//sẽ rõ khi nhìn sang hàm chuyển trạng thái.
 	DWORD timeRun;//biến để ghi lại tg chạy của aladin phục vụ cho việc set state stop
@@ -97,7 +99,7 @@ private:
 	
 	DWORD untouchableTime = 0;
 	//Weapon
-	
+	Apple* mApple;
 	bool isAttachApple, isFinish = true, isAttacking, isUntouchable, isSitAttach, isSubLife;
 	//items
 	int numRedJewel = 0, numApple = 0, collisGuard = 0, point = 0,life = 0;
@@ -238,6 +240,12 @@ public:
 	void ResetAll();
 
 	bool GetIsCollisWithBrick() { return this->isCollisWithBrick; }
+	void CollisionWithWall(vector<LPGAMEOBJECT>* coObject);
+	void CollisionWithRope(vector<LPGAMEOBJECT>* coObject);
+	void CollisionWithItems(vector<LPGAMEOBJECT>* coObject);
+	void CollisionWithDefensiveWork(vector<LPGAMEOBJECT>* coObject);
+	void CollisionWithEnemy(vector<LPGAMEOBJECT>* coObject);
+
 	static Aladin *GetInstance();
 	~Aladin();
 };

@@ -17,7 +17,7 @@ SceneGame::SceneGame(int state)
 	this->mEvent = ALADIN_NORMAL;
 	mCamera = Camera::GetInstance();
 	mGrid = new Grid();
-	
+	mBoard = Board::GetInstance();
 	mGrid->Clear();
 	obj.clear();
 
@@ -76,9 +76,10 @@ void SceneGame::Render()
 		{
 			x->Render();
 		}
+		
 		mAladin->Render();
 		mMapObject->Draw();
-		
+		mBoard->Render();
 		break;
 	
 	}
@@ -94,7 +95,7 @@ void SceneGame::Update(DWORD dt)
 		{
 		
 			mGrid->ListObject(obj);//lay ra cac obj thuoc camera
-			
+			mBoard->Update();
 			for (auto x : obj)
 			{
 				x->Update(dt, &obj);

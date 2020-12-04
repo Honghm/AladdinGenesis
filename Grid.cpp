@@ -147,7 +147,7 @@ void Grid::ListObject(vector<GameObject*> &listObj)
 	listObj.clear();
 
 	//can 1 DS cac object dang nam trong vung camera
-	unordered_map<int, GameObject*> mapObj;
+	//unordered_map<int, GameObject*> mapObj;
 
 	//xet het cac cell thuoc camera
 	for (int i = top_cell; i <= bottom_cell; i++)//Theo Hang
@@ -159,14 +159,15 @@ void Grid::ListObject(vector<GameObject*> &listObj)
 			for (int k = 0; k < cells[i][j].size(); k++)
 			{
 				//add zo
-				mapObj[cells[i][j].at(k)->GetID()] = cells[i][j].at(k);//them vao neu chua co trong mapObject
+				//mapObj[cells[i][j].at(k)->GetID()] = cells[i][j].at(k);//them vao neu chua co trong mapObject
 				//mapObj[listID.at(k)]= cells[i][j].at(k);
+				listObj.push_back(cells[i][j].at(k));
 			}
 		}
 	}
 
-	for (auto& x : mapObj)
-		listObj.push_back(x.second);
+	/*for (auto& x : mapObj)
+		listObj.push_back(x.second);*/
 }
 
 void Grid::ReadMatrixGrid(int row,int column,vector<int> &IdObj)

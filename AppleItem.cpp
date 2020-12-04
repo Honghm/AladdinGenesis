@@ -46,12 +46,27 @@ void AppleItem::LoadResources()
 
 void AppleItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {
+	if (health == 0)
+		if (!isFinished)
+		{
+			state = 1;
+			if (animations[1]->GetCurrentFrame() == 2)
+			{
+				isFinished = true;
+				state = 0;
+			}
+		}
+		else
+			return;
+	else
+		state = 0;
 }
 
 void AppleItem::Render()
 {
-	
-	animations[state]->Render(x + (int)width / 2, y + (int)height / 2,0,1, Camera::GetInstance()->GetTranform());
+	if (health == 0 && isFinished)
+		return;
+	animations[state]->Render(x + (int)width / 2, y + (int)height / 2, 0, 1, Camera::GetInstance()->GetTranform());
 }
 
 void AppleItem::GetBoundingBox(float & left, float & top, float & right, float & bottom)
