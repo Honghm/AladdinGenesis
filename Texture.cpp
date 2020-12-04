@@ -80,7 +80,14 @@ void CTexture::LoadTexTure()
 	Add(Type::BOX, "Resources/Object/bbox.png");
 
 	//Enemy
-	
+	Add(Type::ENEMY_BAT, "Resources/Enemy/Bat.png", D3DCOLOR_XRGB(255, 0, 255));
+	Add(Type::SELECTOR, "Resources/Object/Selector.png", D3DCOLOR_XRGB(255, 0, 255));
+	Add(Type::FONT, "Resources/Font/font.png");
+	Add(Type::GUARDS, "Resources/Enemy/Guards.png", D3DCOLOR_XRGB(120, 193, 152));
+	Add(Type::DIE, "Resources/Enemy/Razoul.png", D3DCOLOR_XRGB(186, 254, 202));
+	Add(Type::SKELETON_IMAGE, "Resources/Enemy/Skeleton.png", D3DCOLOR_XRGB(255, 0, 255));
+
+
 }
 
 LPDIRECT3DTEXTURE9 CTexture::Get(Type id)

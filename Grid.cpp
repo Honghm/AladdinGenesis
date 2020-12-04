@@ -113,6 +113,12 @@ GameObject *Grid::NewObject(int id, int type, int direction, int width, int heig
 	case MOVINGBRICK:
 		return new MovingBrick(x, y, width, height, state);
 		break;
+	case WALL:
+		return new Wall(x, y, width, height);
+		break;
+	case ROPE:
+		return new Rope(x, y, width, height);
+		break;
 	case APPLEITEM:
 		return new AppleItem(x, y, width, height);
 		break;
@@ -127,6 +133,18 @@ GameObject *Grid::NewObject(int id, int type, int direction, int width, int heig
 		break;
 	case RESTARTPOINT:
 		return new RestartPoint(id, x, y, width, height);
+		break;
+	case BAT:
+		return new Bat(x, y, direction);
+		break;
+	case GUARD:
+		return new Guard(x, y, direction);
+		break;
+	case SKELETON:
+		return new Skeleton(x, y, state);
+		break;
+	case MONKEY:
+		return new Monkey(x, y, direction);
 		break;
 	}
 }

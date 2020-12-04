@@ -81,7 +81,9 @@ void SceneGame::Render()
 		mMapObject->Draw();
 		mBoard->Render();
 		break;
-	
+	case ALADIN_DIE:
+		mAladin->Render();
+		break;
 	}
 	
 }
@@ -118,7 +120,14 @@ void SceneGame::Update(DWORD dt)
 			
 		}
 		break;
-	
+	case ALADIN_DIE:
+		if (mAladin->GetLife() < 0)
+		{	//SceneManager::GetInstance()->SetScene(new SceneGameOver());
+		}
+		else
+			mAladin->Update(dt, &obj);//scenegame
+		
+		break;
 	}
 	
 }

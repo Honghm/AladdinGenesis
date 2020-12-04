@@ -5,11 +5,22 @@
 #include "Brick.h"
 #include <iostream>
 #include <fstream>
-
-#include"debug.h"
-
-#include "Apple.h"
+#include "MovingBrick.h"
+#include "Keyboard.h"
+#include "Wall.h"
 #include "Rope.h"
+#include"debug.h"
+#include "Apple.h"
+#include "Items.h"
+#include "Arrow.h"
+#include "RedJewel.h"
+#include "Bob.h"
+#include "Genie.h"
+#include "Heart.h"
+#include "RestartPoint.h"
+#include "Bat.h"
+#include "Guard.h"
+#include "SwordGuard.h"
 #include "SceneManager.h"
 
 using namespace std;

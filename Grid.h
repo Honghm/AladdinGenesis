@@ -1,16 +1,24 @@
 #pragma once
 #include "GameObject.h"
 #include <fstream>
-#include "define.h"
-#include "Brick.h"
-#include "Arrow.h"
+#include"define.h"
+#include"Brick.h"
+#include "Camera.h"
+#include"Arrow.h"
 #include "Bob.h"
 #include "MovingBrick.h"
+#include"Wall.h"
+#include "Rope.h"
 #include "AppleItem.h"
 #include "RedJewel.h"
-#include "RestartPoint.h"
 #include "Genie.h"
 #include "Heart.h"
+#include "RestartPoint.h"
+#include "Bat.h"
+#include "Guard.h"
+#include "Skeleton.h"
+#include "Monkey.h"
+#include<iostream>
 
 #include "Camera.h"
 

@@ -115,6 +115,30 @@
     <Filter Include="Object\Rope">
       <UniqueIdentifier>{24bfc56c-ca2f-4b6e-930d-99a7aaf62b49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameComponents\Weapon\Bone">
+      <UniqueIdentifier>{88aae08d-e16a-4c14-b032-5b56c6b170d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Weapon\GuardWeapon">
+      <UniqueIdentifier>{88572627-eb57-448e-8d43-a5b309438797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{386880ab-2183-47d2-9439-5f8dca5ca5d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Bat">
+      <UniqueIdentifier>{c5a3de67-ecdb-4cbb-a59b-6422264e2d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Guard">
+      <UniqueIdentifier>{2cf6962f-f72e-4f88-92d0-6c8c09d9b28b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Monkey">
+      <UniqueIdentifier>{d6323394-edca-4693-8968-e083f950d158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Skeleton">
+      <UniqueIdentifier>{e3ed5593-a18f-48e1-8991-23aef48b0bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Wall">
+      <UniqueIdentifier>{63f468a5-7188-430c-adcc-09ca4937d539}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -222,6 +246,27 @@
     <ClCompile Include="Rope.cpp">
       <Filter>Object\Rope</Filter>
     </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>GameComponents\Weapon\Bone</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordGuard.cpp">
+      <Filter>GameComponents\Weapon\GuardWeapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Object\Enemy\Bat</Filter>
+    </ClCompile>
+    <ClCompile Include="Guard.cpp">
+      <Filter>Object\Enemy\Guard</Filter>
+    </ClCompile>
+    <ClCompile Include="Monkey.cpp">
+      <Filter>Object\Enemy\Monkey</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Object\Enemy\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Object\Wall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -325,6 +370,27 @@
     </ClInclude>
     <ClInclude Include="Rope.h">
       <Filter>Object\Rope</Filter>
+    </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>GameComponents\Weapon\Bone</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordGuard.h">
+      <Filter>GameComponents\Weapon\GuardWeapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Object\Enemy\Bat</Filter>
+    </ClInclude>
+    <ClInclude Include="Guard.h">
+      <Filter>Object\Enemy\Guard</Filter>
+    </ClInclude>
+    <ClInclude Include="Monkey.h">
+      <Filter>Object\Enemy\Monkey</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Object\Enemy\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Object\Wall</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

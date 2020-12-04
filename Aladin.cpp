@@ -31,7 +31,7 @@ Aladin *Aladin::_instance = NULL;
 
 void Aladin::ResetAll()
 {
-	this->health = 8;
+	this->health = 99999;
 	this->life = 3;
 	this->isBeingHurt = false;
 	this->point = 0;
@@ -51,7 +51,7 @@ Aladin::Aladin()
 {
 	GameObject::GameObject();
 	this->type = ALADDIN;
-	this->health = 8;
+	this->health = 9999;
 	numApple = 9999;
 	life = 3;
 	mApple = new Apple();
@@ -1314,7 +1314,6 @@ void Aladin::GetBoundingBox(float &left, float &top, float &right, float &bottom
 		bottom = top + 52;
 	}
 }
-
 void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 {
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -1329,7 +1328,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 	list_Brick.clear();
 	for (UINT i = 0; i < coObject->size(); i++)
 	{
-		if (coObject->at(i)->GetType() == Type::BRICK)
+		if (coObject->at(i)->GetType() == Type::BRICK || coObject->at(i)->GetType() == Type::MOVINGBRICK)
 		{
 			list_Brick.push_back(coObject->at(i));
 		}
@@ -1344,7 +1343,7 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 	}
 	else
 	{
-		
+
 		float min_tx, min_ty, nx = 0, ny;
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);//dem loc ra xem laoi doi tuong, tg, huong
 		if (nx != 0) vx = 0;
@@ -1353,11 +1352,12 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			if (dynamic_cast<Brick *>(e->obj))//e->obj is Brick
+			if (dynamic_cast<Brick*>(e->obj))//e->obj is Brick
 			{
 				//DebugOut(L"Collision", NULL);
 				if (e->nx != 0)//co xay ra va cham theo phuong Ox
 				{
+					if (isCollisWithWall) dx = 0;
 					x += dx;
 				}
 				else//k xay ra va cham theo phuong Ox
@@ -1366,32 +1366,52 @@ void Aladin::CollisionWithBrick(vector<LPGAMEOBJECT>* coObject)
 				}
 				if (e->ny == -1)//dang di xuong
 				{
- 					//y += min_ty * dy + ny * 0.4f;
+					//y += min_ty * dy + ny * 0.4f;
 					if (ny != 0)
 					{
 						vy = 0;
 					}
 					isCollisWithBrick = true;
-					
+					if (isCollisWithWall) dy = 0;
 				}
 				else// Nhay duoi len(ny==1)
 				{
 					/*if(e->ny==0)*/
-						y += dy;
+					y += dy;
 				}
-				
+
 			}
 			else
 			{
-				
-				
+				dynamic_cast<MovingBrick*>(e->obj);
+				if (e->nx != 0)
+				{
+					x += dx;
+					dy = 0;
+					//isCollisWithBrick = true;
+				}
+				else
+				{
+					x += min_tx * dx + nx * 0.4f;
+				}
+				if (e->ny == -1)
+				{
+					//y += min_ty * dy + ny * 0.4f;
+					if (ny != 0)
+					{
+						vy = 0;
+					}
+					isCollisWithBrick = true;
+				}
+				else// Nhay duoi len
+				{
+					y += dy;
+				}
 			}
 		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
-
-
 
 void Aladin::CollisionWithWall(vector<LPGAMEOBJECT>* coObject)
 {
