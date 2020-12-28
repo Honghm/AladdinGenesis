@@ -3,7 +3,7 @@
 #include "SceneManager.h"
 #include"SceneGame.h"
 #include "Keyboard.h"
-
+#include "SceneIntro.h"
 
 #define  MAX_FRAME_RATE 60;
 

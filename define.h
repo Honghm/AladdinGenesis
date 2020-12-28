@@ -132,9 +132,22 @@ enum Type
 	Map10_X = 1120,
 	Map10_Y = 896,
 
-	
+	//Map boss
+	MapBoss = 1100,
+	MapBoss_Rows = 7,
+	MapBoss_Columns = 26,
+	MapBoss_Tile = 147,
+	MapBoss_X = 0,
+	MapBoss_Y = 0,
 
-	
+	MapBoss2 = 1200,
+	MapBoss2_Rows = 7,
+	MapBoss2_Columns = 26,
+	MapBoss2_Tile = 141,
+	MapBoss2_X = 0,
+	MapBoss2_Y = 224,
+	BossBackGround = 1300,
+
 	//MapObject
 	Map_Object = 10000
 };

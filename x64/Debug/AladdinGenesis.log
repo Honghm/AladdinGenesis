@@ -1,55 +1,87 @@
-﻿  AppleItem.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+﻿  Apple.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  AppleBoard.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  AppleItem.cpp
+D:\My Code\code game\AladdinGenesis\AppleItem.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   Arrow.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Bat.cpp
+D:\My Code\code game\AladdinGenesis\Bat.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  Board.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Bob.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\Bob.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  Bone.cpp
+D:\My Code\code game\AladdinGenesis\Bone.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   define.cpp
   Brick.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Camera.cpp
-D:\My Code\AladdinGenesis\Camera.h(2,10): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\Camera.h(2,10): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   CGame.cpp
-D:\My Code\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\CGame.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   debug.cpp
+  Font.cpp
+D:\My Code\code game\AladdinGenesis\Texture.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Game.cpp
-D:\My Code\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   GameMap.cpp
-D:\My Code\AladdinGenesis\GameMap.h(3,10): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameMap.h(3,10): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   GameObject.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Genie.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\Genie.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   Grid.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  Heart.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  Items.cpp
-D:\My Code\AladdinGenesis\Gameobject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  Keyboard.cpp
-D:\My Code\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  main.cpp
-D:\My Code\AladdinGenesis\main.cpp(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  Aladin.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  MapObject.cpp
-D:\My Code\AladdinGenesis\MapObject.h(3,10): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
-  MovingBrick.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Guard.cpp
+D:\My Code\code game\AladdinGenesis\Guard.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   Generating Code...
   Compiling...
+  HealthBoard.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Heart.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Items.cpp
+D:\My Code\code game\AladdinGenesis\Gameobject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Keyboard.cpp
+D:\My Code\code game\AladdinGenesis\Keyboard.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  main.cpp
+D:\My Code\code game\AladdinGenesis\main.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  Aladin.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  MapObject.cpp
+D:\My Code\code game\AladdinGenesis\MapObject.h(3,10): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Monkey.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  MovingBrick.cpp
+D:\My Code\code game\AladdinGenesis\MovingBrick.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   RedJewel.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  RedJewelBoard.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   RestartPoint.cpp
-D:\My Code\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Rope.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Scene.cpp
-D:\My Code\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\Scene.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   SceneGame.cpp
-D:\My Code\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\SceneGame.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   SceneManager.cpp
-D:\My Code\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\CGame.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Skeleton.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Sprite.cpp
-D:\My Code\AladdinGenesis\Sprite.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\Sprite.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  SwordGuard.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
   Texture.cpp
-D:\My Code\AladdinGenesis\Texture.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+D:\My Code\code game\AladdinGenesis\Texture.h(3,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Generating Code...
+  Compiling...
+  Wall.cpp
+D:\My Code\code game\AladdinGenesis\GameObject.h(2,9): fatal error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  Weapon.cpp
+D:\My Code\code game\AladdinGenesis\Weapon.cpp : fatal error C1041: cannot open program database 'D:\My Code\code game\AladdinGenesis\x64\Debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   Generating Code...

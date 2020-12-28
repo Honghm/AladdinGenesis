@@ -5,7 +5,7 @@ void Game::GameInit(HWND hWnd)
 {
 	CGame::GetInstance()->Init(hWnd);
 	mSceneManager = SceneManager::GetInstance();
-	mSceneManager->SetScene(new SceneGame(1));
+	mSceneManager->SetScene(new SceneIntro());
 	mKeyboard = CKeyHandler::GetInstance();
 }
 

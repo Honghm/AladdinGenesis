@@ -13,7 +13,7 @@ SceneGame::SceneGame(int state)
 	mAladin = Aladin::GetInstance();
 	if (state != 1) 
 		mAladin->ResetAll();
-	this->State = state;
+	/*this->State = state;*/
 	this->mEvent = ALADIN_NORMAL;
 	mCamera = Camera::GetInstance();
 	mGrid = new Grid();

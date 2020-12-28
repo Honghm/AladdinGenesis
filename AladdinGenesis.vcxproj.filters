@@ -139,6 +139,18 @@
     <Filter Include="Object\Wall">
       <UniqueIdentifier>{63f468a5-7188-430c-adcc-09ca4937d539}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Boss">
+      <UniqueIdentifier>{9fae5e46-620b-441b-b175-407cdc6b36e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Weapon\Fire">
+      <UniqueIdentifier>{64f88256-bd58-471f-9268-92db29a83b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Weapon\StaticFire">
+      <UniqueIdentifier>{5f868ff4-f6f2-4ebb-b0be-30548906159d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Weapon\SwirlFire">
+      <UniqueIdentifier>{3caaad88-f70d-4e4a-8ec0-67330e95e4f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -267,6 +279,33 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Object\Wall</Filter>
     </ClCompile>
+    <ClCompile Include="SceneBoss.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneIntro.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWin.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Snake.cpp">
+      <Filter>Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>GameComponents\Weapon\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="SwirlFire.cpp">
+      <Filter>GameComponents\Weapon\SwirlFire</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticFire.cpp">
+      <Filter>GameComponents\Weapon\StaticFire</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGame.h">
@@ -391,6 +430,33 @@
     </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>Object\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBoss.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneIntro.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneWin.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>GameComponents\Weapon\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="SwirlFire.h">
+      <Filter>GameComponents\Weapon\SwirlFire</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticFire.h">
+      <Filter>GameComponents\Weapon\StaticFire</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
